@@ -4,9 +4,13 @@ common_rules = {
         {'path': '/config.php.bak', 'status': 200, 'type': 'application/octet-stream'},
         {'path': '/db.php.bak', 'status': 200, 'type': 'application/octet-stream'},
         {'path': '/conf/config.ini', 'status': 200, 'type_no': 'html'},
+        {'path': '/config.yaml', 'status': 200, 'type': 'text/yaml'},  # New entry
+        {'path': '/config.json', 'status': 200, 'type': 'application/json'}  # New entry
     ],
     'shell_scripts': [
-        {'path': '/test.sh', 'status': 200, 'tag': '#!/'}
+        {'path': '/test.sh', 'status': 200, 'tag': '#!/'},
+        {'path': '/deploy.sh', 'status': 200, 'tag': '#!/'},  # New entry
+        {'path': '/backup.sh', 'status': 200, 'tag': '#!/'},   # New entry
     ],
     'editor': [
         # Ueditor
@@ -14,7 +18,7 @@ common_rules = {
         {'path': '/statics/modules/ueditor/ueditor.config.js', 'status': 200, 'type': 'application/javascript'},
         {'path': '/static/js/ueditor/ueditor.config.js', 'status': 200, 'type': 'application/javascript'},
         {'path': '/ueditor/ueditor.config.js', 'status': 200, 'type': 'application/javascript'},
-
+  
         # kindeditor
         {'path': '/kindeditor/kindeditor-all.js', 'status': 200, 'type': 'application/javascript'},
         {'path': '/statics/modules/kindeditor/kindeditor-all.js', 'status': 200, 'type': 'application/javascript'},
@@ -87,12 +91,18 @@ common_rules = {
         {'path': '/axis2-admin/', 'status': 200, 'type': 'text/html', 'tag': 'axis2-web'},
         {'path': '/services/listServices', 'status': 200, 'type': 'text/html', 'tag': 'axis2-web'}
     ],
-    'other': [
-    ]
+    'other': []
 }
 
 white_rules = [
+    # Allow specific paths or types
+    {'path': '/allowed-path/', 'status': 200, 'type': 'text/html'},
+    {'path': '/allowed-api/', 'status': 200, 'type': 'application/json'},
 ]
 
 black_rules = [
+    # Block specific paths or types
+    {'path': '/admin/', 'status': 403, 'type': 'text/html'},  # Example path to block
+    {'path': '/private/', 'status': 403, 'type': 'text/html'},  # Another path to block
+    {'path': '/restricted/', 'status': 403, 'type': 'text/html'},  # Another path to block
 ]
